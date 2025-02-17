@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d37230cc8b0f24e24bde2765a782ff89
+guid: 141ceb3f826fd4d4598afa351878225e
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - PP Monument Extended
+  - Monument Extended
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
