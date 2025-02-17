@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class WindowSwitcher : MonoBehaviour
 {
@@ -57,6 +58,14 @@ public class WindowSwitcher : MonoBehaviour
             windowToOpen.SetActive(true); // Включаем новое окно
             openCanvasGroup.interactable = true;
             openCanvasGroup.blocksRaycasts = true;
+
+            ScrollRect scrollView = windowToOpen.GetComponentInChildren<ScrollRect>();
+
+            if (scrollView != null)
+            {
+                yield return null; // Ждем 1 кадр перед сбросом (чтобы ScrollRect прогрузился)
+                scrollView.verticalNormalizedPosition = 1f; // Поднимаем контент вверх
+            }
 
             // Плавное появление нового окна
             for (float t = 0f; t <= 1f; t += Time.deltaTime * 5)
