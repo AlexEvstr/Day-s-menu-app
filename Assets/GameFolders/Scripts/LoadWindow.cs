@@ -12,6 +12,6 @@ public class LoadWindow : MonoBehaviour
     private IEnumerator OpenMainScene()
     {
         yield return new WaitForSeconds(2.5f);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainScene");
     }
 }
