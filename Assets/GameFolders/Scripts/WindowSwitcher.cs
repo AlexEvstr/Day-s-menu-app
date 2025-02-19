@@ -4,15 +4,14 @@ using UnityEngine.UI;
 
 public class WindowSwitcher : MonoBehaviour
 {
-    [SerializeField] private GameObject windowToClose; // Окно, которое нужно закрыть
-    [SerializeField] private GameObject windowToOpen;  // Окно, которое нужно открыть
+    [SerializeField] private GameObject windowToClose;
+    [SerializeField] private GameObject windowToOpen;
 
     private CanvasGroup closeCanvasGroup;
     private CanvasGroup openCanvasGroup;
 
     private void Awake()
     {
-        // Получаем или добавляем CanvasGroup для закрываемого окна
         if (windowToClose != null)
         {
             closeCanvasGroup = windowToClose.GetComponent<CanvasGroup>();
@@ -20,14 +19,12 @@ public class WindowSwitcher : MonoBehaviour
                 closeCanvasGroup = windowToClose.AddComponent<CanvasGroup>();
         }
 
-        // Получаем или добавляем CanvasGroup для открываемого окна
         if (windowToOpen != null)
         {
             openCanvasGroup = windowToOpen.GetComponent<CanvasGroup>();
             if (openCanvasGroup == null)
                 openCanvasGroup = windowToOpen.AddComponent<CanvasGroup>();
 
-            // Делаем окно невидимым, но включенным (чтобы работала анимация)
             windowToOpen.SetActive(true);
             openCanvasGroup.alpha = 0f;
             openCanvasGroup.interactable = false;
@@ -44,7 +41,6 @@ public class WindowSwitcher : MonoBehaviour
     {
         if (windowToClose != null)
         {
-            // Плавное исчезновение закрываемого окна
             for (float t = 1f; t >= 0f; t -= Time.deltaTime * 5)
             {
                 closeCanvasGroup.alpha = t;
@@ -55,7 +51,7 @@ public class WindowSwitcher : MonoBehaviour
 
         if (windowToOpen != null)
         {
-            windowToOpen.SetActive(true); // Включаем новое окно
+            windowToOpen.SetActive(true);
             openCanvasGroup.interactable = true;
             openCanvasGroup.blocksRaycasts = true;
 
@@ -63,11 +59,10 @@ public class WindowSwitcher : MonoBehaviour
 
             if (scrollView != null)
             {
-                yield return null; // Ждем 1 кадр перед сбросом (чтобы ScrollRect прогрузился)
-                scrollView.verticalNormalizedPosition = 1f; // Поднимаем контент вверх
+                yield return null;
+                scrollView.verticalNormalizedPosition = 1f;
             }
 
-            // Плавное появление нового окна
             for (float t = 0f; t <= 1f; t += Time.deltaTime * 5)
             {
                 openCanvasGroup.alpha = t;
